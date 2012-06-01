@@ -1,14 +1,21 @@
-from fabric.api import *
-import time
+from fabric.api import env, settings, execute, run
+from time import sleep
 
 env.user = 'aegir'
 env.shell = '/bin/bash -c'
 
 def build(site, makefile, buildname, webserver, dbserver, profile):
-    '''Build process for putting together a site with Aegir.
+    '''Creates or migrates an Aegir site to a new or existing platform.
 
-    Will create a site with the url specified in the 'site' argument or
-    if a site already exists it will migrate it to a new platform.
+    If a sites does not exist and the platform does not exist the first time this
+    script is ran, it will create a new platform and install a new site on that
+    platform. If there is a platform, the new site will be created on the existing
+    platform. If there is an existing site, the script will either create a
+    new platform and migrate the site to it or migrate the site to an existing
+    platform.
+
+    See the github page for more info: https://github.com/zachseifts/aegir_deployment
+
     '''
 
     # Create a new platform
@@ -57,9 +64,9 @@ def install_site(site, buildname):
     '''
     run("drush @%s provision-install" % (site,))
     run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
-    time.sleep(5)
+    sleep(5)
     run("drush @hostmaster hosting-dispatch")
-    time.sleep(5)
+    sleep(5)
     run("drush @hostmaster hosting-task @%s verify" % (site,))
 
 def import_site(site, buildname):
