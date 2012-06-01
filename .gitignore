@@ -1,4 +1,5 @@
 *.py[co]
+*.swp
 
 # Packages
 *.egg
@@ -25,3 +26,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+# Virtualenv
+env/
