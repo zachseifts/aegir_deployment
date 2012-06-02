@@ -4,7 +4,7 @@ This is a collection of fabric commands that do awesome stuff with sites
 hosted in Aegir. It gives you the ability to create sites and migrate them
 between platforms automatically.
 
-Inspired by [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
+Based on [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
 
 ## Requirements
 

@@ -86,9 +86,7 @@ if [[ -z $SITE ]] ||
    [[ -z $MAKEFILE ]] ||
    [[ -z $FABFILE ]] ||
    [[ -z $PROFILE ]] ||
-   [[ -z $BUILDNAME ]] ||
-   [[ -z $WEBSERVER ]] ||
-   [[ -z $DBSERVER ]]
+   [[ -z $BUILDNAME ]]
 then
   usage
   exit 1
