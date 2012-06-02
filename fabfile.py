@@ -1,9 +1,10 @@
-from fabric.api import env, settings, execute, run, hide
+from fabric.api import env, settings, execute, run, hide, task
 from time import sleep
 
 env.user = 'aegir'
 env.shell = '/bin/bash -c'
 
+@task
 def build(site, makefile, buildname, webserver, dbserver, profile):
     '''Creates or migrates an Aegir site to a new or existing platform.
 
@@ -43,6 +44,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile):
     execute(save_alias, site=site, buildname=buildname, webserver=webserver, dbserver=dbserver, profile=profile)
     execute(import_site, site=site, buildname=buildname)
 
+@task
 def build_platform(makefile, buildname):
     ''' Builds a new platform for the site.
     '''
@@ -51,16 +53,19 @@ def build_platform(makefile, buildname):
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
     run("drush @hostmaster hosting-dispatch")
 
+@task
 def migrate_site(site, buildname):
     '''Migrates a site to a new platform.
     '''
     run("drush @%s provision-migrate '@platform_%s'" % (site, buildname))
 
+@task
 def save_alias(site, buildname, webserver, dbserver, profile):
     ''' Saves an alias for the site.
     '''
     run("drush provision-save @%s --context_type=site --uri=%s --platform=@platform_%s --server=@server_%s --db_server=@server_%s --profile=%s --client_name=admin" % (site, site, buildname, webserver, dbserver, profile))
 
+@task
 def install_site(site, buildname):
     ''' Imports a site into a platform
     '''
@@ -71,6 +76,7 @@ def install_site(site, buildname):
     sleep(5)
     run("drush @hostmaster hosting-task @%s verify" % (site,))
 
+@task
 def import_site(site, buildname):
     ''' Imports a site into the frontend.
     '''
