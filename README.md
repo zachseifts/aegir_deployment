@@ -38,9 +38,14 @@ You can also use individual commands like build\_platform:
 
 Supported commands:
 
- - build\_platform
- - migrate\_site
- - save\_alias
- - install\_site
- - import\_site
+    $ fab --list
+    Available commands:
+
+        build           Creates or migrates an Aegir site to a new or existing platform.
+        build_platform  Builds a new platform for the site.
+        import_site     Imports a site into the frontend.
+        install_site    Imports a site into a platform
+        migrate_site    Migrates a site to a new platform.
+        save_alias      Saves an alias for the site.
+
 
