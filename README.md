@@ -31,7 +31,7 @@ Of you can use the deploy.sh script like this:
     MAKEFILE=/path/to/the/makefile.make
     FABFILE=/path/to/the/fabfile.py
     SITE=example.com
-    AEGIR=aegir.example.com
+    AEGIR=aegir1.example.com,aegir2.example.com,aegir3.example.com
     PROFILE=profilename
     BUILDNAME=NameOfBuild
     ./deploy.sh -s $SITE -a $AEGIR -m $MAKEFILE -f $FABFILE -p $PROFILE -b $BUILDNAME
