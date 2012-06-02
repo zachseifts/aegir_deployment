@@ -1,4 +1,4 @@
-from fabric.api import env, settings, execute, run
+from fabric.api import env, settings, execute, run, hide
 from time import sleep
 
 env.user = 'aegir'
@@ -20,15 +20,17 @@ def build(site, makefile, buildname, webserver, dbserver, profile):
 
     # Create a new platform
     with settings(warn_only=True):
-      platform_result = run('drush @platform_%s status' % (buildname,))
+        with hide('output'):
+            platform_result = run('drush @platform_%s status' % (buildname,))
 
     if platform_result.failed:
-      # No platform exists, create a new one
-      execute(build_platform, makefile=makefile, buildname=buildname)
+        # No platform exists, create a new one
+        execute(build_platform, makefile=makefile, buildname=buildname)
     
     # Check and see if the site exists
     with settings(warn_only=True):
-        site_result = run('drush @%s status' % (site,))
+        with hide('output'):
+            site_result = run('drush @%s status' % (site,))
 
     # If the site does not exist, we need to create the alias and install it
     if site_result.failed:
