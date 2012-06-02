@@ -28,7 +28,13 @@ this command when changes are made to the master branch of your project:
  
 Of you can use the deploy.sh script like this:
 
-    ./deploy.sh -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild
+    MAKEFILE=/path/to/the/makefile.make
+    FABFILE=/path/to/the/fabfile.py
+    SITE=example.com
+    AEGIR=aegir.example.com
+    PROFILE=profilename
+    BUILDNAME=NameOfBuild
+    ./deploy.sh -s $SITE -a $AEGIR -m $MAKEFILE -f $FABFILE -p $PROFILE -b $BUILDNAME
 
 And it will do everything automaticaly. If you are using remote Aegir
 instances, run your database on a different server, or use clusters you
