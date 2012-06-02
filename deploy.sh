@@ -5,7 +5,7 @@
 function usage() {
 cat << EOF
 usage:
-${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild [-w master] [-d localhost]
+${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild [-w master] [-d localhost]
 
 Creates or migrates an Aegir site to a new or existing platform.
 
@@ -26,6 +26,7 @@ OPTIONS:
    -f /path/to/fabfile.py     The path to the fabfile.py
    -p profile                 The name of the install profile for this site
    -b BuildName               The name of this build
+   -v [6|7]                   The major Drupal version number, either 6 or 7
    -w webserver               The Aegir webserver this site will run on
                               Do not include the @server_ prefix. Optional.
    -d dbserver                The Aegir database server this site will run on
@@ -39,10 +40,11 @@ AEGIR=
 MAKEFILE=
 FABFILE=
 PROFILE=
+VERSION=
 BUILDNAME=
 WEBSERVER=master
 DBSERVER=localhost
-while getopts "hs:m:a:f:p:b:w:d:" OPTION
+while getopts "hs:m:a:f:p:b:v:w:d:" OPTION
 do
   case $OPTION in
     h)
@@ -67,6 +69,9 @@ do
     b)
       BUILDNAME=$OPTARG
       ;;
+    v)
+      VERSION=$OPTARG
+      ;;
     w)
       WEBSERVER=$OPTARG
       ;;
@@ -86,13 +91,14 @@ if [[ -z $SITE ]] ||
    [[ -z $MAKEFILE ]] ||
    [[ -z $FABFILE ]] ||
    [[ -z $PROFILE ]] ||
+   [[ -z $VERSION ]] ||
    [[ -z $BUILDNAME ]]
 then
   usage
   exit 1
 fi
 
-fab -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=$WEBSERVER,dbserver=$DBSERVER,profile=$PROFILE
+fab -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=$WEBSERVER,dbserver=$DBSERVER,profile=$PROFILE,version=$VERSION
 if [ $? -ne 0 ]
 then
   echo "The fabric build command failed."

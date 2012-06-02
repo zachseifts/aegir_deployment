@@ -48,7 +48,7 @@ That's it. You should have everything setup and ready to go.
 Make sure the fab command is in your path and create a jenkins job that runs
 this command when changes are made to the master branch of your project:
 
-    fab -H aegir.example.com -f /path/to/fabric.py build:site=testing.example.com,makefile=/path/to/makefile.make,buildname=NameOfBuild,webserver=master,dbserver=localhost,profile=ProfileName
+    fab -H aegir.example.com -f /path/to/fabric.py build:site=testing.example.com,makefile=/path/to/makefile.make,buildname=NameOfBuild,webserver=master,dbserver=localhost,profile=ProfileName,version=7
  
 Of you can use the deploy.sh script like this:
 
@@ -57,8 +57,9 @@ Of you can use the deploy.sh script like this:
     SITE=example.com
     AEGIR=aegir1.example.com,aegir2.example.com,aegir3.example.com
     PROFILE=profilename
+    VERSION=7
     BUILDNAME=NameOfBuild
-    ./deploy.sh -s $SITE -a $AEGIR -m $MAKEFILE -f $FABFILE -p $PROFILE -b $BUILDNAME
+    ./deploy.sh -s $SITE -a $AEGIR -m $MAKEFILE -f $FABFILE -p $PROFILE -v $VERSION -b $BUILDNAME
 
 And it will do everything automaticaly. If you are using remote Aegir
 instances, run your database on a different server, or use clusters you
@@ -68,7 +69,7 @@ command. Use `deploy.sh -h` to get the full list of options.
 
 You can also use individual commands like `build_platform`:
 
-    fab -H aegir.example.com -f /path/to/fabric.py build_platform:makefile=/path/to/makefile.make,buildname=NameOfBuild
+    fab -H aegir.example.com -f /path/to/fabric.py build_platform:makefile=/path/to/makefile.make,buildname=NameOfBuild,version=7
 
 ### Fabric commands
 
@@ -87,7 +88,7 @@ You can also use individual commands like `build_platform`:
 
     $ ./deploy.sh -h
     usage:
-    ./deploy.sh [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild [-w master] [-d localhost]
+    ./deploy.sh [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild [-w master] [-d localhost]
 
     Creates or migrates an Aegir site to a new or existing platform.
 
@@ -108,6 +109,7 @@ You can also use individual commands like `build_platform`:
        -f /path/to/fabfile.py     The path to the fabfile.py
        -p profile                 The name of the install profile for this site
        -b BuildName               The name of this build
+       -v [6|7]                   The major Drupal version number, either 6 or 7
        -w webserver               The Aegir webserver this site will run on
                                   Do not include the @server_ prefix. Optional.
        -d dbserver                The Aegir database server this site will run on

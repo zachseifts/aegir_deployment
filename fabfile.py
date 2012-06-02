@@ -5,7 +5,7 @@ env.user = 'aegir'
 env.shell = '/bin/bash -c'
 
 @task
-def build(site, makefile, buildname, webserver, dbserver, profile):
+def build(site, makefile, buildname, webserver, dbserver, profile, version):
     '''Creates or migrates an Aegir site to a new or existing platform.
 
     If a sites does not exist and the platform does not exist the first time this
@@ -26,7 +26,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile):
 
     if platform_result.failed:
         # No platform exists, create a new one
-        execute(build_platform, makefile=makefile, buildname=buildname)
+        execute(build_platform, makefile=makefile, buildname=buildname, version=vesion)
     
     # Check and see if the site exists
     with settings(warn_only=True):
@@ -45,11 +45,12 @@ def build(site, makefile, buildname, webserver, dbserver, profile):
     execute(import_site, site=site, buildname=buildname)
 
 @task
-def build_platform(makefile, buildname):
+def build_platform(makefile, buildname, version):
     ''' Builds a new platform.
     '''
-    run("drush make %s /var/aegir/platforms/%s" % (makefile, buildname))
-    run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform'" % (buildname, buildname))
+    run('mkdir -p /var/aegir/platforms/%s.x/' % (version))
+    run("drush make %s /var/aegir/platforms/%s.x/%s" % (version, makefile, buildname))
+    run("drush --root='/var/aegir/platforms/%s.x/%s' provision-save '@platform_%s' --context_type='platform'" % (version, buildname, buildname))
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
     run("drush @hostmaster hosting-dispatch")
 
