@@ -19,6 +19,30 @@ Based on [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
    to the new platform
  - If the platform exists, it will migrate the site to the existing platform
 
+## Install
+
+As your Jenkins user, clone this repo and make sure that the use can ssh to the
+Aegir servers you want to deploy code to.
+
+    $ su jenkins
+    $ cd 
+    $ mkdir -p scripts
+    $ cd scripts
+    $ git clone git://github.com/zachseifts/aegir_deployment.git
+    $ cd aegir_deployment
+
+If you do not already have virtualenv installed, install it from homebrew and
+create a virtualenv.
+
+    $ brew install virtualenv
+    $ virtualenv env
+
+Now download fabric
+
+    $ ./env/bin/pip install fabric
+
+That's it. You should have everything setup and ready to go.
+
 ## Usage
 
 Make sure the fab command is in your path and create a jenkins job that runs
