@@ -76,7 +76,7 @@ You can also use individual commands like `build_platform`:
     $ fab --list
     Available commands:
 
-        aegir_cron      Runs the aegir cron job.
+        aegir_cron      Runs the aegir hosting-dispatch job.
         build           Creates or migrates an Aegir site to a new or existing platform.
         build_platform  Builds a new platform.
         import_site     Imports a site into the frontend.
