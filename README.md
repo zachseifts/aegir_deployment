@@ -59,7 +59,7 @@ You can also use individual commands like `build_platform`:
         migrate_site    Migrates a site to a platform.
         save_alias      Saves an alias a site.
 
-### Deploy script help
+### Deploy script options
 
     $ ./deploy.sh -h
     usage:
