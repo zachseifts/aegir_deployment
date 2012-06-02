@@ -49,7 +49,7 @@ def build_platform(makefile, buildname, version):
     ''' Builds a new platform.
     '''
     run('mkdir -p /var/aegir/platforms/%s.x/' % (version))
-    run("drush make %s /var/aegir/platforms/%s.x/%s" % (version, makefile, buildname))
+    run("drush make %s /var/aegir/platforms/%s.x/%s" % (makefile, version, buildname))
     run("drush --root='/var/aegir/platforms/%s.x/%s' provision-save '@platform_%s' --context_type='platform'" % (version, buildname, buildname))
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
     run("drush @hostmaster hosting-dispatch")
