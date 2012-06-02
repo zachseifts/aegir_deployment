@@ -28,11 +28,15 @@ this command when changes are made to the master branch of your project:
  
 Of you can use the deploy.sh script like this:
 
-    ./deploy.sh -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild -w master -d localhost
+    ./deploy.sh -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild
 
-And it will do everything automaticaly.
+And it will do everything automaticaly. If you are using remote Aegir
+instances, run your database on a different server, or use clusters you
+may need to specify the webserver and database server. You can do that by
+adding the `-w WEBSERVERNAME` and `-d DBSERVERNAME` to the `deploy.sh`
+command. Use `deploy.sh -h` to get the full list of options.
 
-You can also use individual commands like build\_platform:
+You can also use individual commands like `build\_platform`:
 
     fab -H aegir.example.com -f /path/to/fabric.py build_platform:makefile=/path/to/makefile.make,buildname=NameOfBuild
 
