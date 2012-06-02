@@ -36,7 +36,7 @@ may need to specify the webserver and database server. You can do that by
 adding the `-w WEBSERVERNAME` and `-d DBSERVERNAME` to the `deploy.sh`
 command. Use `deploy.sh -h` to get the full list of options.
 
-You can also use individual commands like `build\_platform`:
+You can also use individual commands like `build_platform`:
 
     fab -H aegir.example.com -f /path/to/fabric.py build_platform:makefile=/path/to/makefile.make,buildname=NameOfBuild
 
