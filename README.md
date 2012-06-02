@@ -9,6 +9,7 @@ Based on [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
 ## Requirements
 
  - Fabric 1.4.2
+ - virtualenv
  - A working Aegir instance
  - A Jenkins instance that has the abilty to ssh to the Aegir instance with a public key
 
@@ -31,10 +32,8 @@ Aegir servers you want to deploy code to.
     $ git clone git://github.com/zachseifts/aegir_deployment.git
     $ cd aegir_deployment
 
-If you do not already have virtualenv installed, install it from homebrew and
-create a virtualenv.
+If you do not already have virtualenv installed, install it and create a virtualenv.
 
-    $ brew install virtualenv
     $ virtualenv env
 
 Now download fabric
