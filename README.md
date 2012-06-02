@@ -59,3 +59,33 @@ Supported commands:
         migrate_site    Migrates a site to a platform.
         save_alias      Saves an alias a site.
 
+Help for `deploy.sh`:
+
+    $ ./deploy.sh -h
+    usage:
+    ./deploy.sh [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild [-w master] [-d localhost]
+
+    Creates or migrates an Aegir site to a new or existing platform.
+
+    If a sites does not exist and the platform does not exist the first time this
+    script is ran, it will create a new platform and install a new site on that
+    platform. If there is a platform, the new site will be created on the existing
+    platform. If there is an existing site, the script will either create a
+    new platform and migrate the site to it or migrate the site to an existing
+    platform.
+
+    See the github page for more info: https://github.com/zachseifts/aegir_deployment
+
+    OPTIONS:
+       -h                         Display this message
+       -s site.domain.com         The domain name of the site
+       -a aegir.domain.com        The url of your Aegir instance
+       -m /path/to/makefile.make  The path to the drush make file for this site
+       -f /path/to/fabfile.py     The path to the fabfile.py
+       -p profile                 The name of the install profile for this site
+       -b BuildName               The name of this build
+       -w webserver               The Aegir webserver this site will run on
+                                  Do not include the @server_ prefix. Optional.
+       -d dbserver                The Aegir database server this site will run on
+                                  Do not include the @server_ prefix. Optional.
+
