@@ -26,7 +26,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
 
     if platform_result.failed:
         # No platform exists, create a new one
-        execute(build_platform, makefile=makefile, buildname=buildname, version=vesion)
+        execute(build_platform, makefile=makefile, buildname=buildname, version=version)
     
     # Check and see if the site exists
     with settings(warn_only=True):
