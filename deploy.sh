@@ -5,7 +5,7 @@
 function usage() {
 cat << EOF
 usage:
-${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild -w master -d localhost
+${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -b NameOfBuild [-w master] [-d localhost]
 
 Creates or migrates an Aegir site to a new or existing platform.
 
@@ -27,9 +27,9 @@ OPTIONS:
    -p profile                 The name of the install profile for this site
    -b BuildName               The name of this build
    -w webserver               The Aegir webserver this site will run on
-                              Do not include the @server_ prefix.
+                              Do not include the @server_ prefix. Optional.
    -d dbserver                The Aegir database server this site will run on
-                              Do not include the @server_ prefix.
+                              Do not include the @server_ prefix. Optional.
 
 EOF
 }
@@ -40,8 +40,8 @@ MAKEFILE=
 FABFILE=
 PROFILE=
 BUILDNAME=
-WEBSERVER=
-DBSERVER=
+WEBSERVER=master
+DBSERVER=localhost
 while getopts "hs:m:a:f:p:b:w:d:" OPTION
 do
   case $OPTION in
