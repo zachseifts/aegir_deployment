@@ -46,7 +46,7 @@ You can also use individual commands like `build_platform`:
 
     fab -H aegir.example.com -f /path/to/fabric.py build_platform:makefile=/path/to/makefile.make,buildname=NameOfBuild
 
-Supported commands:
+### Fabric commands
 
     $ fab --list
     Available commands:
@@ -59,7 +59,7 @@ Supported commands:
         migrate_site    Migrates a site to a platform.
         save_alias      Saves an alias a site.
 
-Help for `deploy.sh`:
+### Deploy script help
 
     $ ./deploy.sh -h
     usage:
