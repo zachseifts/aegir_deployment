@@ -46,7 +46,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile):
 
 @task
 def build_platform(makefile, buildname):
-    ''' Builds a new platform for the site.
+    ''' Builds a new platform.
     '''
     run("drush make %s /var/aegir/platforms/%s" % (makefile, buildname))
     run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform'" % (buildname, buildname))
@@ -55,19 +55,19 @@ def build_platform(makefile, buildname):
 
 @task
 def migrate_site(site, buildname):
-    '''Migrates a site to a new platform.
+    ''' Migrates a site to a platform.
     '''
     run("drush @%s provision-migrate '@platform_%s'" % (site, buildname))
 
 @task
 def save_alias(site, buildname, webserver, dbserver, profile):
-    ''' Saves an alias for the site.
+    ''' Saves an alias a site.
     '''
     run("drush provision-save @%s --context_type=site --uri=%s --platform=@platform_%s --server=@server_%s --db_server=@server_%s --profile=%s --client_name=admin" % (site, site, buildname, webserver, dbserver, profile))
 
 @task
 def install_site(site, buildname):
-    ''' Imports a site into a platform
+    ''' Provisions a new site.
     '''
     run("drush @%s provision-install" % (site,))
     run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
@@ -84,4 +84,10 @@ def import_site(site, buildname):
     run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
     run("drush @hostmaster hosting-import @%s" % (site,))
     run("drush @hostmaster hosting-task @%s verify" % (site,))
+
+@task
+def aegir_cron():
+    ''' Runs the aegir cron job.
+    '''
+    run('drush @hostmaster hosting-dispatch')
 

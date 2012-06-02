@@ -41,11 +41,11 @@ Supported commands:
     $ fab --list
     Available commands:
 
+        aegir_cron      Runs the aegir cron job.
         build           Creates or migrates an Aegir site to a new or existing platform.
-        build_platform  Builds a new platform for the site.
+        build_platform  Builds a new platform.
         import_site     Imports a site into the frontend.
-        install_site    Imports a site into a platform
-        migrate_site    Migrates a site to a new platform.
-        save_alias      Saves an alias for the site.
-
+        install_site    Provisions a new site.
+        migrate_site    Migrates a site to a platform.
+        save_alias      Saves an alias a site.
 
