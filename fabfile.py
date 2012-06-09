@@ -71,7 +71,9 @@ def install_site(site, buildname):
     ''' Provisions a new site.
     '''
     run("drush @%s provision-install" % (site,))
-    run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
+    # Sometimes the hostingt-task verify is already running for the platform
+    with settings(warn_only=True):
+        run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
     sleep(5)
     execute(aegir_cron);
     sleep(5)
@@ -82,7 +84,9 @@ def import_site(site, buildname):
     ''' Imports a site into the frontend.
     '''
     run("drush @hostmaster hosting-import @%s" % (site,))
-    run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
+    # Sometimes the hostingt-task verify is already running for the platform
+    with settings(warn_only=True):
+        run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
     run("drush @hostmaster hosting-import @%s" % (site,))
     run("drush @hostmaster hosting-task @%s verify" % (site,))
 
