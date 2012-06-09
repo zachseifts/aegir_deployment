@@ -101,6 +101,6 @@ def test_run(site, tests):
     ''' Runs drush test-run on a site.
     '''
     run('drush @%s en -y simpletest' % (site,))
-    run('drush @%s test-run %s' % (site, tests))
+    run('drush @%s test-run --verbose %s' % (site, tests))
     run('drush @%s dis -y simpletest' % (site,))
 
