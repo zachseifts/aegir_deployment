@@ -104,3 +104,10 @@ def test_run(site, tests):
     run('drush @%s test-run %s' % (site, tests))
     run('drush @%s dis -y simpletest' % (site,))
 
+@task
+def clear_all_caches(site):
+  ''' Clears the drupal cache and varnish cache for a site.
+  '''
+  run('drush @%s cc all' % (site,))
+  run('drush @%s vpa' % (site,))
+

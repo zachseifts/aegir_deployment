@@ -75,13 +75,14 @@ You can also use individual commands like `build_platform`:
     $ fab --list
     Available commands:
 
-        aegir_cron      Runs the aegir hosting-dispatch job.
-        build           Creates or migrates an Aegir site to a new or existing platform.
-        build_platform  Builds a new platform.
-        import_site     Imports a site into the frontend.
-        install_site    Provisions a new site.
-        migrate_site    Migrates a site to a platform.
-        save_alias      Saves an alias a site.
+        aegir_cron        Runs the aegir hosting-dispatch job.
+        build             Creates or migrates an Aegir site to a new or existing platform.
+        build_platform    Builds a new platform.
+        clear_all_caches  Clears the drupal cache and varnish cache for a site.
+        import_site       Imports a site into the frontend.
+        install_site      Provisions a new site.
+        migrate_site      Migrates a site to a platform.
+        save_alias        Saves an alias a site.
 
 ### Deploy script options
 
