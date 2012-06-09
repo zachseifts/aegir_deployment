@@ -38,7 +38,7 @@ If you do not already have virtualenv installed, install it and create a virtual
 
 Now download fabric
 
-    $ ./env/bin/pip install fabric
+    $ ./env/bin/pip install -r requirements.txt
 
 That's it. You should have everything setup and ready to go.
 
