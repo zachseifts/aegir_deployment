@@ -87,6 +87,7 @@ You can also use individual commands like `build_platform`:
         install_site      Provisions a new site.
         migrate_site      Migrates a site to a platform.
         save_alias        Saves an alias a site.
+        save_platform     Saves a new platform.
 
 ### Deploy script options
 
