@@ -48,7 +48,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
 def build_platform(makefile, buildname, version):
     ''' Builds a new platform.
     '''
-    execute(mkdir_platform_dir, version=version)
+    execute(make_platform_dir, version=version)
     execute(drush_make, makefile=makefile, buildname=buildname, version=version)
     execute(save_platform, buildname=buildname, version=version)
 
