@@ -22,6 +22,10 @@ Based on [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
 
 ## Install
 
+If you're using Ubuntu 10.04 you need to run:
+
+    $ sudo aptitude install build-essential python-dev
+
 As your Jenkins user, clone this repo and make sure that the use can ssh to the
 Aegir servers you want to deploy code to.
 
