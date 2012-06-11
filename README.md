@@ -83,6 +83,7 @@ You can also use individual commands like `build_platform`:
         build             Creates or migrates an Aegir site to a new or existing platform.
         build_platform    Builds a new platform.
         clear_all_caches  Clears the drupal cache and varnish cache for a site.
+        drush_make        Runs drush make on a make file.
         import_site       Imports a site into the frontend.
         install_site      Provisions a new site.
         migrate_site      Migrates a site to a platform.

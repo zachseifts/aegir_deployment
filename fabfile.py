@@ -49,8 +49,14 @@ def build_platform(makefile, buildname, version):
     ''' Builds a new platform.
     '''
     run('mkdir -p /var/aegir/platforms/%s.x/' % (version))
-    run("drush make %s /var/aegir/platforms/%s.x/%s" % (makefile, version, buildname))
+    execute(drush_make, makefile=makefile, buildname=buildname, version=version)
     execute(save_platform, buildname=buildname, version=version)
+
+@task
+def drush_make(makefile, buildname, version):
+    ''' Runs drush make on a make file.
+    '''
+    run("drush make %s /var/aegir/platforms/%s.x/%s" % (makefile, version, buildname))
 
 @task
 def save_platform(buildname, version):
