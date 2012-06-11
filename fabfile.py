@@ -48,9 +48,15 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
 def build_platform(makefile, buildname, version):
     ''' Builds a new platform.
     '''
-    run('mkdir -p /var/aegir/platforms/%s.x/' % (version))
+    execute(mkdir_platform_dir, version=version)
     execute(drush_make, makefile=makefile, buildname=buildname, version=version)
     execute(save_platform, buildname=buildname, version=version)
+
+@task
+def make_platform_dir(version):
+    ''' Creates a directory for platforms.
+    '''
+    run('mkdir -p /var/aegir/platforms/%s.x/' % (version))
 
 @task
 def drush_make(makefile, buildname, version):
@@ -64,7 +70,7 @@ def save_platform(buildname, version):
     '''
     run("drush --root='/var/aegir/platforms/%s.x/%s' provision-save '@platform_%s' --context_type='platform'" % (version, buildname, buildname))
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
-    execute(aegir_cron);
+    execute(aegir_cron)
 
 @task
 def migrate_site(site, buildname):
@@ -87,7 +93,7 @@ def install_site(site, buildname):
     with settings(warn_only=True):
         run("drush @hostmaster hosting-task @platform_%s verify" % (buildname,))
     sleep(5)
-    execute(aegir_cron);
+    execute(aegir_cron)
     sleep(5)
     run("drush @hostmaster hosting-task @%s verify" % (site,))
 
