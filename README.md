@@ -111,6 +111,7 @@ You can also use individual commands like `build_platform`:
        -a aegir.domain.com        The url of your Aegir instance
        -m /path/to/makefile.make  The path to the drush make file for this site
        -f /path/to/fabfile.py     The path to the fabfile.py
+       -r /path/to/fab            The path to the fabric executable
        -p profile                 The name of the install profile for this site
        -b BuildName               The name of this build
        -v [6|7]                   The major Drupal version number, either 6 or 7

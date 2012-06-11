@@ -24,6 +24,7 @@ OPTIONS:
    -a aegir.domain.com        The url of your Aegir instance
    -m /path/to/makefile.make  The path to the drush make file for this site
    -f /path/to/fabfile.py     The path to the fabfile.py
+   -r /path/to/fab            The path to the fabric executable
    -p profile                 The name of the install profile for this site
    -b BuildName               The name of this build
    -v [6|7]                   The major Drupal version number, either 6 or 7
@@ -42,9 +43,10 @@ FABFILE=
 PROFILE=
 VERSION=
 BUILDNAME=
+FAB=fab
 WEBSERVER=master
 DBSERVER=localhost
-while getopts "hs:m:a:f:p:b:v:w:d:" OPTION
+while getopts "hs:m:a:f:r:p:b:v:w:d:" OPTION
 do
   case $OPTION in
     h)
@@ -62,6 +64,9 @@ do
       ;;
     f)
       FABFILE=$OPTARG
+      ;;
+    r)
+      FAB=$OPTARG
       ;;
     p)
       PROFILE=$OPTARG
@@ -98,7 +103,7 @@ then
   exit 1
 fi
 
-fab -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=$WEBSERVER,dbserver=$DBSERVER,profile=$PROFILE,version=$VERSION
+$FAB -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=$WEBSERVER,dbserver=$DBSERVER,profile=$PROFILE,version=$VERSION
 if [ $? -ne 0 ]
 then
   echo "The fabric build command failed."
