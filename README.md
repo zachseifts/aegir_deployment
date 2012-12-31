@@ -95,7 +95,7 @@ You can also use individual commands like `build_platform`:
 
     $ ./deploy.sh -h
     usage:
-    ./deploy.sh [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild [-w master] [-d localhost]
+    ./deploy.sh [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild -w master -d localhost
 
     Creates or migrates an Aegir site to a new or existing platform.
 
@@ -119,7 +119,7 @@ You can also use individual commands like `build_platform`:
        -b BuildName               The name of this build
        -v [6|7]                   The major Drupal version number, either 6 or 7
        -w webserver               The Aegir webserver this site will run on
-                                  Do not include the @server_ prefix. Optional.
+                                  Do not include the @server_ prefix.
        -d dbserver                The Aegir database server this site will run on
-                                  Do not include the @server_ prefix. Optional.
+                                  Do not include the @server_ prefix.
 

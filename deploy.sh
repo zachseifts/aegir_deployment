@@ -5,7 +5,7 @@
 function usage() {
 cat << EOF
 usage:
-${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild [-w master] [-d localhost]
+${0#} [-h] -s example.com -a aegir.example.com -m /path/to/makefile.make -f /path/to/fabfile.py -p profilename -v 6|7 -b NameOfBuild -w master -d localhost
 
 Creates or migrates an Aegir site to a new or existing platform.
 
@@ -29,9 +29,9 @@ OPTIONS:
    -b BuildName               The name of this build
    -v [6|7]                   The major Drupal version number, either 6 or 7
    -w webserver               The Aegir webserver this site will run on
-                              Do not include the @server_ prefix. Optional.
+                              Do not include the @server_ prefix.
    -d dbserver                The Aegir database server this site will run on
-                              Do not include the @server_ prefix. Optional.
+                              Do not include the @server_ prefix.
 
 EOF
 }
@@ -44,8 +44,8 @@ PROFILE=
 VERSION=
 BUILDNAME=
 FAB=fab
-WEBSERVER=master
-DBSERVER=localhost
+WEBSERVER=
+DBSERVER=
 while getopts "hs:m:a:f:r:p:b:v:w:d:" OPTION
 do
   case $OPTION in
@@ -97,6 +97,8 @@ if [[ -z $SITE ]] ||
    [[ -z $FABFILE ]] ||
    [[ -z $PROFILE ]] ||
    [[ -z $VERSION ]] ||
+   [[ -z $WEBSERVER ]] ||
+   [[ -z $DBSERVER ]] ||
    [[ -z $BUILDNAME ]]
 then
   usage
