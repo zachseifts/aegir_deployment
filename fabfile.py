@@ -58,10 +58,10 @@ def drush_make(makefile, buildname):
     run("drush make %s /var/aegir/platforms/%s" % (makefile, buildname))
 
 @task
-def save_platform(buildname):
+def save_platform(buildname, webserver):
     ''' Saves a new platform.
     '''
-    run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform'" % (buildname, buildname))
+    run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform' --web_server='%s'" % (buildname, buildname, webserver))
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
     execute(aegir_cron)
 

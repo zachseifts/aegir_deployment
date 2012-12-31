@@ -105,7 +105,7 @@ then
   exit 1
 fi
 
-$FAB -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=$WEBSERVER,dbserver=$DBSERVER,profile=$PROFILE,version=$VERSION
+$FAB -H $AEGIR -f $FABFILE build:site=$SITE,makefile=$MAKEFILE,buildname=$BUILDNAME,webserver=@server_$WEBSERVER,dbserver=@server_$DBSERVER,profile=$PROFILE,version=$VERSION
 if [ $? -ne 0 ]
 then
   echo "The fabric build command failed."
