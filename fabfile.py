@@ -26,7 +26,7 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
 
     if platform_result.failed:
         # No platform exists, create a new one
-        execute(build_platform, makefile=makefile, buildname=buildname, version=version)
+        execute(build_platform, makefile=makefile, buildname=buildname)
     
     # Check and see if the site exists
     with settings(warn_only=True):
@@ -45,23 +45,23 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
     execute(import_site, site=site, buildname=buildname)
 
 @task
-def build_platform(makefile, buildname, version):
+def build_platform(makefile, buildname):
     ''' Builds a new platform.
     '''
-    execute(drush_make, makefile=makefile, buildname=buildname, version=version)
-    execute(save_platform, buildname=buildname, version=version)
+    execute(drush_make, makefile=makefile, buildname=buildname)
+    execute(save_platform, buildname=buildname)
 
 @task
-def drush_make(makefile, buildname, version):
+def drush_make(makefile, buildname):
     ''' Runs drush make on a make file.
     '''
-    run("drush make %s /var/aegir/platforms/%s" % (makefile, version, buildname))
+    run("drush make %s /var/aegir/platforms/%s" % (makefile, buildname))
 
 @task
-def save_platform(buildname, version):
+def save_platform(buildname):
     ''' Saves a new platform.
     '''
-    run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform'" % (version, buildname, buildname))
+    run("drush --root='/var/aegir/platforms/%s' provision-save '@platform_%s' --context_type='platform'" % (buildname, buildname))
     run("drush @hostmaster hosting-import '@platform_%s'" % (buildname,))
     execute(aegir_cron)
 
