@@ -39,10 +39,8 @@ def build(site, makefile, buildname, webserver, dbserver, profile, version):
         execute(install_site, site=site, buildname=buildname)
         return
 
-    # If the site exists, migrate it to the new platform, save alias, and import the migrated site.
+    # If the site exists, migrate it to the new platform
     execute(migrate_site, site=site, buildname=buildname)
-    execute(save_alias, site=site, buildname=buildname, webserver=webserver, dbserver=dbserver, profile=profile)
-    execute(import_site, site=site, buildname=buildname)
 
 @task
 def build_platform(makefile, buildname, webserver):
