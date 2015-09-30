@@ -11,7 +11,7 @@ Based on [mig5's aegir\_cid project](https://github.com/mig5/aegir_cid).
  - Fabric 1.4.2
  - virtualenv
  - A working Aegir instance
- - A Jenkins instance that has the abilty to ssh to the Aegir instance with a public key
+ - A Jenkins instance that has the ability to ssh to the Aegir instance with a public key
 
 ## Features
 
